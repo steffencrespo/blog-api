@@ -11,7 +11,7 @@ BlogPosts.create("Here and now", "Talks about wasting time", "Leo Steffen", "9/3
 BlogPosts.create("Never enough", "Greed is not your friend", "Leo Steffen", "9/4/2017");
 
 router.get('/', (req, res) => {
-	res.json(BlogPosts.get());
+	res.status(200).json(BlogPosts.get());
 });
 
 router.post('/', jsonParser, (req, res) => {
@@ -27,7 +27,14 @@ router.post('/', jsonParser, (req, res) => {
 	}
 
 	const item = BlogPosts.create(req.body.title, req.body.content, req.body.author, req.body.publishDate);
-	return res.status(201).json(item);
+
+	if (item) {
+		return res.status(201).json(item);	
+	} else {
+		return res.status(500).send("Internal server error");
+	}
+
+	
 });
 
 router.put('/:id', jsonParser, (req, res) => {
@@ -48,7 +55,7 @@ router.put('/:id', jsonParser, (req, res) => {
 		return res.status(400).send(error);
 	}
 
-	BlogPosts.update({
+	const item = BlogPosts.update({
 		id: req.params.id,
 		title: req.body.title,
 		content: req.body.content,
@@ -57,7 +64,12 @@ router.put('/:id', jsonParser, (req, res) => {
 	});
 	console.log(`Updated blog post \`${req.params.id}\``);
 
-	res.status(204).end();
+	if (item) {
+		res.status(200).json(item);	
+	} else {
+		res.status(500).send("Internal Server Error");
+	}
+	
 });
 
 router.delete('/:id', (req, res) => {
