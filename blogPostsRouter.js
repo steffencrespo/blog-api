@@ -41,7 +41,7 @@ router.put('/:id', jsonParser, (req, res) => {
 			return res.status(400).send(error);
 		}
 	}
-	
+
 	if(req.body.id != req.params.id) {
 		const error = `Body and request id parameters do not match`;
 		console.error(error);
@@ -55,12 +55,15 @@ router.put('/:id', jsonParser, (req, res) => {
 		author: req.body.author,
 		publishDate: req.body.publishDate
 	});
+	console.log(`Updated blog post \`${req.params.id}\``);
 
 	res.status(204).end();
 });
 
 router.delete('/:id', (req, res) => {
-
+	BlogPosts.delete(req.params.id);
+	console.log(`Deleted blog post \`${req.params.id}\``);
+	res.status(204).end();
 });
 
 module.exports = router;
