@@ -3,9 +3,6 @@ const app = express();
 
 const morgan = require('morgan');
 
-const bodyParser = require('body-parser');
-const jsonParser = bodyParser.json();
-
 const blogPostsRouter = require('./blogPostsRouter');
 
 app.use(morgan('common'));

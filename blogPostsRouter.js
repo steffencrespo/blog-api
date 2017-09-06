@@ -30,8 +30,33 @@ router.post('/', jsonParser, (req, res) => {
 	return res.status(200).send(item);
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', jsonParser, (req, res) => {
+	const requiredFields = ['title', 'content', 'author', 'publishDate'];
 
+	for (let i = 0; i < requiredFields.length; i++) {
+		const field = requiredFields[i];
+		if (!(field in req.body)) {
+			const error = `Missing ${field} in request body`;
+			console.error(error);
+			return res.status(400).send(error);
+		}
+	}
+	
+	if(req.body.id != req.params.id) {
+		const error = `Body and request id parameters do not match`;
+		console.error(error);
+		return res.status(400).send(error);
+	}
+
+	BlogPosts.update({
+		id: req.params.id,
+		title: req.body.title,
+		content: req.body.content,
+		author: req.body.author,
+		publishDate: req.body.publishDate
+	});
+
+	res.status(204).end();
 });
 
 router.delete('/:id', (req, res) => {
