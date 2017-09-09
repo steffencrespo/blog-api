@@ -32,13 +32,13 @@ function closeServer() {
 				reject(err);
 				return;
 			}
-			resolve;
+			resolve();
 		});
 	});
 }
 
 if (require.main === module) {
-	runServer().catch(err => console.log.error(err));
+	runServer().catch(err => console.error(err));
 }
 
 module.exports = {app, runServer, closeServer};
