@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: XZFaIBzIvtL+eA9Ju0xsI3z0DdG1D/BbzEeMWE0Qr1AAY6Ir0ArwuO7/rj2nZhAZKz+P29zod9m/vxbEv8JjrR8FZ1Hrpt9vUTDy1kzZQx8Y2ojmegRg0uXZKz0mW+SLt+NqHs9MgQOkgLRbdCeB2yxRR7u0yc5jhppzYWNmHEGLNQatNNpGfJz47+X+/W6kjd0Z1vqy0gST0W8DPJX8CKclGkF+dRkcZn3NZ7yBFUEz4t/VnUrTnN/Ms7bobrs/r1mPLOC6HzBspUr+dFlcnfWpmSXog5r+g8AvOOQg5H6qqOmKz0w/1ZFMtpK7o9ZF4u31kjFRsv+mTr7e5Z5rmDlfuZmB5BOnSnxyfCjw1iXlc1pPO8ONwtaot9vIV1qRSoaeomL4jw6PMcz9wLtCyI2co83VJ/ccGJwE3p6MO9WH1yVds1Wa+uK9w8ZzDDfl84sqJ71f8cxcZR212C3oVVLewWc5EveVaE6YcHGqdxXuIbvrfInQh14PGV5Lpvgbn1WTKVZt5l5jfqdMkXb+vXtXhkV2BCsiIC7pvYu9mu3t4ja9AAzu4ZVKWwcd6ZQfhHIETEreTXFYzskwkAut/wfJ2sYG/9KMYnNI3vQzXU2KP42WwVGADMAaAy+6FaZ8RgGIMeHfti3aKJoNqINFDYe4vWHzfx9HG1+viAHl6p0=
+  app: vast-river-15099
+  on:
+    repo: steffencrespo/blog-api
