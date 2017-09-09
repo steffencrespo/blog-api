@@ -53,7 +53,22 @@ describe('blog posts', function(){
 				})
 	});
 
-	it('should delete a post', function() {
-
+	it('should delete a blog post', function() {
+		return chai.request(app)
+				.get('/blog-posts')
+				.then(function(res){
+					let postId = res.body[0].id;
+					let postsCount = res.body.length;
+					return chai.request(app)
+						.delete(`/blog-posts/${postId}`)
+						.then(function(res){
+							res.should.have.status(204);
+							return chai.request(app)
+									.get('/blog-posts')
+									.then(function(res){
+										res.body.length.should.below(postsCount);
+									})
+						})
+				})
 	})
 });
