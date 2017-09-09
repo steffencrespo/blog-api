@@ -37,7 +37,20 @@ describe('blog posts', function(){
 	});
 
 	it('should modify an existing post', function() {
+		let modifyPost = {'title':'test post', 'content': 'dummy content', 'author': 'test bot', 'publishDate': 'today'};
 
+		return chai.request(app)
+				.get('/blog-posts')
+				.then(function(res){
+					modifyPost.id = res.body[0].id;
+					return chai.request(app)
+						.put(`/blog-posts/${modifyPost.id}`)
+						.send(modifyPost)
+						.then(function(res){
+							res.should.have.status(200);
+							res.body.should.deep.equal(modifyPost);
+						});
+				})
 	});
 
 	it('should delete a post', function() {
